@@ -58,7 +58,7 @@ class MainHandler:
         self._host = host
         self._port = port
 
-    def main(self):
+    def main_run(self):
         reactor.listenTCP(self._port, DriveFactory())
         reactor.run()
 
