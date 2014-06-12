@@ -18,7 +18,7 @@ class DriveConnect(Protocol):
         #self.sendLine('Connected')
         self.transport.write("Connected")
 
-    def connectionLost(self, reason=connectionDone):
+    def connectionLost(self, reason):
         print("Connection lost")
 
     def dataReceived(self, data):
@@ -52,8 +52,20 @@ class DriveFactory(Factory):
 #         self.wfile.write(self.data.upper())
 
 
+class MainHandler:
+
+    def __init__(self, host, port=8080):
+        self._host = host
+        self._port = port
+
+    def main(self):
+        reactor.listenTCP(self._port, DriveFactory())
+        reactor.run()
+
+
 if __name__ == '__main__':
     HOST, PORT = 'localhost', 9999
+
 
     reactor.listenTCP(PORT, DriveFactory())
     reactor.run()
