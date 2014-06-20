@@ -15,8 +15,7 @@ class DriveConnect(Protocol):
 
     def connectionMade(self):
         print("Connect")
-        #self.sendLine('Connected')
-        self.transport.write("Connected")
+        self.transport.write("Connected\n")
 
     def connectionLost(self, reason):
         print("Connection lost")
