@@ -14,25 +14,27 @@ class DriveConnect(Protocol):
         log.startLogging(sys.stdout)
 
     def connectionMade(self):
-        print("Connect")
-        self.transport.write("Connected\n")
+        print('Connect')
+        self.transport.write('Connected\n')
 
     def connectionLost(self, reason):
-        print("Connection lost")
+        print('Connection lost')
 
     def dataReceived(self, data):
-        print("Data received")
+        print('Data received')
         #data_str = data.decode(encoding='base64')
         print(data)
 
-        if data == "FW":
-            print("Forward")
-        elif data == "BW":
-            print("Backward")
-        elif data == "RS":
-            print("Right")
-        elif data == "LS":
-            print("Left")
+        if data == 'FW':
+            print('Forward')
+        elif data == 'BW':
+            print('Backward')
+        elif data == 'RT':
+            print('Right')
+        elif data == 'LT':
+            print('Left')
+        elif data('ST'):
+            print('Stop')
 
 
 class DriveFactory(Factory):
@@ -46,7 +48,7 @@ class DriveFactory(Factory):
 #
 #     def handle(self):
 #         self.data = self.rfile.readline().strip()
-#         print("{} wrote".format(self.client_address[0]))
+#         print('{} wrote'.format(self.client_address[0]))
 #         print(self.data)
 #         self.wfile.write(self.data.upper())
 
