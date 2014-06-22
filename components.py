@@ -7,18 +7,20 @@ import time
 class DriveModule():
     def __init__(self):
         self.gpio17 = rpilib.GPIOrtx('17')
+        self.gpio18 = rpilib.GPIOrtx('18')
+        self.gpio22 = rpilib.GPIOrtx('22')
+        self.gpio23 = rpilib.GPIOrtx('23')
+
+    def online(self):
         self.gpio17.export()
         self.gpio17.setDirection('out')
 
-        self.gpio18 = rpilib.GPIOrtx('18')
         self.gpio18.export()
         self.gpio18.setDirection('out')
 
-        self.gpio22 = rpilib.GPIOrtx('22')
         self.gpio22.export()
         self.gpio22.setDirection('out')
 
-        self.gpio23 = rpilib.GPIOrtx('23')
         self.gpio23.export()
         self.gpio23.setDirection('out')
 

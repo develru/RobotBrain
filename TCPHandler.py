@@ -6,19 +6,23 @@ from twisted.protocols.basic import LineReceiver
 from twisted.internet import reactor
 from twisted.python import log
 import sys
+from components import DriveModule
 
 
 class DriveConnect(Protocol):
 
     def __init__(self):
         log.startLogging(sys.stdout)
+        self.drive = DriveModule()
 
     def connectionMade(self):
         print('Connect')
-        self.transport.write('Connected\n')
+        self.transport.write('Connected')
 
     def connectionLost(self, reason):
         print('Connection lost')
+        self.drive.stop()
+        self.drive.offline()
 
     def dataReceived(self, data):
         print('Data received')
@@ -27,6 +31,7 @@ class DriveConnect(Protocol):
 
         if data == 'FW':
             print('Forward')
+
         elif data == 'BW':
             print('Backward')
         elif data == 'RT':
@@ -35,6 +40,10 @@ class DriveConnect(Protocol):
             print('Left')
         elif data == 'ST':
             print('Stop')
+        elif data == 'DRVST':
+            self.drive.online()
+            self.transport.write('online')
+
 
 
 class DriveFactory(Factory):
