@@ -33,7 +33,7 @@ class DriveConnect(Protocol):
             print('Right')
         elif data == 'LT':
             print('Left')
-        elif data('ST'):
+        elif data == 'ST':
             print('Stop')
 
 
