@@ -38,18 +38,22 @@ class DriveModule():
 
     def drive_forward(self):
         self.gpio18.writeValue('1')
-        self.gpio23.writeValue('1')
+        self.gpio22.writeValue('1')
 
     def drive_backward(self):
         self.gpio17.writeValue('1')
-        self.gpio22.writeValue('1')
+        self.gpio23.writeValue('1')
 
     def steer_left(self):
         self.gpio17.writeValue('1')
-        time.sleep(0.5)
+        self.gpio22.writeValue('1')
+        time.sleep(0.2)
         self.gpio17.writeValue('0')
+        self.gpio22.writeValue('0')
 
     def steer_right(self):
         self.gpio18.writeValue('1')
-        time.sleep(0.5)
+        self.gpio23.writeValue('1')
+        time.sleep(0.2)
         self.gpio18.writeValue('0')
+        self.gpio23.writeValue('0')

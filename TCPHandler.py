@@ -31,15 +31,19 @@ class DriveConnect(Protocol):
 
         if data == 'FW':
             print('Forward')
-
+            self.drive.drive_forward()
         elif data == 'BW':
             print('Backward')
+            self.drive.drive_backward()
         elif data == 'RT':
             print('Right')
+            self.drive.steer_right()
         elif data == 'LT':
             print('Left')
+            self.drive.steer_left()
         elif data == 'ST':
             print('Stop')
+            self.drive.stop()
         elif data == 'DRVST':
             self.drive.online()
             self.transport.write('online')
