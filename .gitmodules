@@ -1,0 +1,3 @@
+[submodule "RPiPy"]
+	path = RPiPy
+	url = https://github.com/develru/RPiPy.git
