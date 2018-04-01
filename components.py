@@ -1,7 +1,9 @@
 __author__ = 'develru'
 
-from RPiPyLib import rpilib
+from RPiPy import rpilib
 import time
+from nanpy import ArduinoApi, SerialManager
+
 
 
 class DriveModule():
@@ -57,3 +59,56 @@ class DriveModule():
         time.sleep(0.2)
         self.gpio18.writeValue('0')
         self.gpio23.writeValue('0')
+
+
+def main():
+    try:
+        connection = SerialManager()
+        a = ArduinoApi(connection=connection)
+    except:
+        print('Failed to connect to Arduino!')
+
+    try:
+        ENA = 10
+        ENB = 5
+        IN1 = 9
+        IN2 = 8
+        IN3 = 7
+        IN4 = 6
+        a.pinMode(IN1, a.OUTPUT)
+        a.pinMode(IN2, a.OUTPUT)
+        a.pinMode(ENA, a.OUTPUT)
+        a.digitalWrite(ENA, a.HIGH)
+        a.pinMode(IN3, a.OUTPUT)
+        a.pinMode(IN4, a.OUTPUT)
+        a.pinMode(ENB, a.OUTPUT)
+        a.digitalWrite(ENB, a.HIGH)
+
+        a.digitalWrite(IN3, a.LOW)
+        a.digitalWrite(IN4, a.HIGH) # left wheel back
+        a.digitalWrite(IN1, a.HIGH)
+        a.digitalWrite(IN2, a.LOW) # right wheel backward
+        time.sleep(0.5)
+        a.digitalWrite(IN3, a.LOW)
+        a.digitalWrite(IN4, a.LOW)
+        a.digitalWrite(IN1, a.LOW)
+        a.digitalWrite(IN2, a.LOW)
+
+        a.digitalWrite(IN3, a.HIGH)
+        a.digitalWrite(IN4, a.LOW) # left wheel forward
+        a.digitalWrite(IN1, a.LOW)
+        a.digitalWrite(IN2, a.HIGH) # right whelle forward
+        time.sleep(0.5)
+        a.digitalWrite(IN3, a.LOW)
+        a.digitalWrite(IN4, a.LOW)
+        a.digitalWrite(IN1, a.LOW)
+        a.digitalWrite(IN2, a.LOW)
+
+        time.sleep(0.5)
+        a.digitalWrite(ENB, a.LOW)
+    except:
+        a.digitalWrite(ENB, a.LOW)
+
+
+if __name__ == '__main__':
+    main()
