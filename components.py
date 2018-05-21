@@ -26,6 +26,7 @@ class DriveModule():
         self.IN4 = 6
 
     def online(self):
+        print('online')
         # self.gpio17.export()
         # self.gpio17.setDirection('out')
 
@@ -66,12 +67,15 @@ class DriveModule():
 
 
     def drive_forward(self):
+        print('drive_forward')
         # self.gpio18.writeValue('1')
         # self.gpio22.writeValue('1')
         self.a.digitalWrite(self.IN1, self.a.LOW)
         self.a.digitalWrite(self.IN2, self.a.HIGH)
         self.a.digitalWrite(self.IN3, self.a.HIGH)
         self.a.digitalWrite(self.IN4, self.a.LOW)
+        time.sleep(1)
+        self.stop()
 
     def drive_backward(self):
         # self.gpio17.writeValue('1')
@@ -80,22 +84,24 @@ class DriveModule():
         self.a.digitalWrite(self.IN2, self.a.LOW)
         self.a.digitalWrite(self.IN3, self.a.LOW)
         self.a.digitalWrite(self.IN4, self.a.HIGH)
+        time.sleep(1)
+        self.stop()
 
     def steer_left(self):
         # self.gpio17.writeValue('1')
         # self.gpio22.writeValue('1')
-        self.a.digitalWrite(self.IN1, self.a.HIGH)
-        time.sleep(0.2)
-        self.a.digitalWrite(self.IN1, self.a.LOW)
+        self.a.digitalWrite(self.IN4, self.a.HIGH)
+        time.sleep(0.1)
+        self.a.digitalWrite(self.IN4, self.a.LOW)
         # self.gpio17.writeValue('0')
         # self.gpio22.writeValue('0')
 
     def steer_right(self):
         # self.gpio18.writeValue('1')
         # self.gpio23.writeValue('1')
-        self.a.digitalWrite(self.IN4, self.a.HIGH)
-        time.sleep(0.2)
-        self.a.digitalWrite(self.IN4, self.a.LOW)
+        self.a.digitalWrite(self.IN1, self.a.HIGH)
+        time.sleep(0.1)
+        self.a.digitalWrite(self.IN1, self.a.LOW)
         # self.gpio18.writeValue('0')
         # self.gpio23.writeValue('0')
 

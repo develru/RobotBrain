@@ -29,24 +29,24 @@ class DriveConnect(Protocol):
         #data_str = data.decode(encoding='base64')
         print(data)
 
-        if data == 'FW':
+        if data == b'FW':
             print('Forward')
             self.drive.drive_forward()
-        elif data == 'BW':
+        elif data == b'BW':
             print('Backward')
             self.drive.drive_backward()
-        elif data == 'RT':
+        elif data == b'RT':
             print('Right')
             self.drive.steer_right()
-        elif data == 'LT':
+        elif data == b'LT':
             print('Left')
             self.drive.steer_left()
-        elif data == 'ST':
+        elif data == b'ST':
             print('Stop')
             self.drive.stop()
-        elif data == 'DRVST':
+        elif data == b'DRVST':
             self.drive.online()
-            self.transport.write('online')
+            self.transport.write(b'online')
 
 
 
